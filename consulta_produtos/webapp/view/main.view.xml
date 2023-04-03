@@ -1,0 +1,79 @@
+<mvc:View controllerName="consultaprodutos.controller.main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        
+        <content>
+            <FlexBox id="FlexboxPesquisa" justifyContent="Center">
+                <Input id="buscar_produto" placeholder="Insira o cód de barras do produto"></Input>
+                <Button id="BtnBuscar" press="onPressBuscar" text="Buscar" icon="sap-icon://search" /> 
+            </FlexBox>
+
+            <VBox id="ProductBox" visible="true">
+                <ObjectHeader id="NomeProduto" title="{ModeloProduto>/product/product_name}"
+                               number="{ModeloProduto>/product/quantity}">
+                
+                  <attributes>
+                    <ObjectAttribute id="codProd" title="Código do produto" text="{ModeloProduto>/code}"/>
+                    <ObjectAttribute id="marcaProd" title="Marca" text="{ModeloProduto>/product/brands}"></ObjectAttribute>
+                  </attributes>
+                </ObjectHeader>
+
+                <Panel id="informacoesAdicionais" headerText="Informações Adicionais">
+                    <HBox id="HboxImg">
+                    <Image id="imgProduto" src="{ModeloProduto>/product/image_url}" width="200px" press="onPressImg" />
+                    
+                    <VBox id="VboxInfoAdicionais">
+                        <ObjectAttribute id="categoria" title="Categoria" text="{ModeloProduto>/product/categories}" class="sapUiSmallMargin"></ObjectAttribute>
+                        <ObjectAttribute id="ingredientes" title="Ingredientes" text="{ModeloProduto>/product/ingredients_text}" class="sapUiSmallMargin"></ObjectAttribute>
+                        <ObjectAttribute id="siteOficial" title="Site Oficial" text="{ModeloProduto>/product/link}" class="sapUiSmallMargin"></ObjectAttribute>
+                        <ObjectAttribute id="paisesVendidos" title="Comercializado em" text="{ModeloProduto>/product/countries}" class="sapUiSmallMargin"></ObjectAttribute>
+                        <ObjectAttribute  id="lojas" title="Lojas" text="{ModeloProduto>/product/stores}" class="sapUiSmallMargin"></ObjectAttribute>
+                    </VBox>
+                </HBox>
+                </Panel>
+
+
+
+            </VBox>
+
+        </content>
+
+        <Panel id="infoIngredientes" headerText="Ingredientes" >
+            <content>
+                <HBox id="" >
+                    <Image src="{ModeloProduto>/product/image_ingredients_small_url}" press="onPressImg"></Image>
+                    <Table id="Ingredientes" items="{ModeloProduto>/product/ingredients}">
+                        <columns>
+                            <Column>
+                                <Text text="Descrição"></Text>
+                            </Column>
+                            <Column > 
+                                <Text text="Porcentagem mínima"></Text>
+                            </Column>
+                            <Column >
+                                <Text text="Porcentagem máxima"></Text>
+                            </Column>
+                            <Column >
+                                <Text text="Porcentagem estimada"></Text>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                   <Text text="{ModeloProduto>text}" />
+                                    <Text text="{ModeloProduto>percent_min}" />
+                                    <Text text="{ModeloProduto>percent_max}" />
+                                    <Text text="{ModeloProduto>percent_estimate}" />
+                                    
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </HBox>
+            </content>
+
+        </Panel>
+
+    </Page>
+</mvc:View>
